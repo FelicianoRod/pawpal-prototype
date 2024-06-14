@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 import '../../../../core/utils/textfield_custom.dart';
 import '../bloc/register_form_validation/register_form_validation_bloc.dart';
 import '../controllers/register_controller.dart';
@@ -30,7 +29,9 @@ class Register extends StatelessWidget {
           ),
         ],
       ),
-      body: BlocBuilder<RegisterFormValidationBloc, RegisterFormValidationState>(builder: (_, state) {
+      body:
+          BlocBuilder<RegisterFormValidationBloc, RegisterFormValidationState>(
+              builder: (_, state) {
         return SingleChildScrollView(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 25),
@@ -53,6 +54,19 @@ class Register extends StatelessWidget {
                   height: 20,
                 ),
                 TextFieldCustom(
+                  icon: Icons.work,
+                  labelText: 'Edad',
+                  hintText: '23',
+                  errorText: state.errorCargo,
+                  fn: (value) {
+                    controller.cargo(value);
+                    return controller.validarCargo(value);
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFieldCustom(
                     icon: Icons.email,
                     labelText: 'Correo electronico',
                     hintText: 'juan55@gmail.como',
@@ -66,25 +80,26 @@ class Register extends StatelessWidget {
                 ),
                 TextFieldCustom(
                     icon: Icons.phone,
-                    labelText: 'Numero de telefono',
+                    labelText: 'Número de teléfono',
                     hintText: '9191728149',
                     errorText: state.errorTelefono,
                     fn: (value) {
                       controller.telefono(value);
                       return controller.validarTelefono(value);
-                    }),
+                    },),
                 const SizedBox(
                   height: 20,
                 ),
                 TextFieldCustom(
-                    icon: Icons.work,
-                    labelText: 'Cargo',
-                    hintText: 'Docente',
-                    errorText: state.errorCargo,
-                    fn: (value) {
-                      controller.cargo(value);
-                      return controller.validarCargo(value);
-                    }),
+                  icon: Icons.person,
+                  labelText: 'Usuario',
+                  hintText: 'jorjito23',
+                  errorText: state.cargo,
+                  fn: (value) {
+                    controller.age(value);
+                    return controller.validateAge(value);
+                  },
+                ),
                 const SizedBox(
                   height: 20,
                 ),

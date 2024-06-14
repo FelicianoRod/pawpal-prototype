@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utils/validador.dart';
+import '../../../../core/utils/validator.dart';
 import '../bloc/register_form_validation/register_form_validation_bloc.dart';
 
 class RegisterController {
@@ -32,7 +32,7 @@ class RegisterController {
     // );
   }
 
-  String? validarName(String? value) {
+  String? validateName(String? value) {
     if (!Validate(value ?? '').isName()) {
       registrarBloc
           .add(const ErrorRegistrarNameCorrectEvent('No se aceptan números'));
@@ -49,6 +49,14 @@ class RegisterController {
       registrarBloc.add(const ValidoRegistrarNameEvent());
     }
     return null;
+  }
+
+  String? validateAge(String? value) {
+    if (!Validate(value ?? '').isNum()) {
+      registrarBloc.add(const ErrorRegisterAgeEvent('Unicamente números'));
+    } else if (value!.isEmpty) {
+      registrarBloc.add(const ErrorRegisterAgeEvent('La edad no puede quedar vacío'));
+    }
   }
 
   String? validarEmail(String? value) {
